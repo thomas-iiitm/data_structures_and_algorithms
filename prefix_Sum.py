@@ -1,7 +1,7 @@
 """
  Computes the sum of elements in array A for each [L, R] range in B using a prefix sum. 
  For each query [L, R] in B, returns the sum of A[L..R] both inclusive
- Time Complexity - O(1) 
+ Time Complexity - O(N) 
  Space Complexity - O(N)
 """
 from itertools import accumulate
@@ -14,6 +14,26 @@ def rangeSum(self, A, B):
     for L, R in B:
         res.append(prefix_sum[R + 1] - prefix_sum[L])
 
+    return res
+
+
+
+"""
+ Find the point of equilibrium such that sum of elements on left side equals sum of elements on right side
+ Time Complexity - O(N) 
+ Space Complexity - O(N)
+"""
+
+def point_of_equilibrium(A):
+    prefix_sum = list(accumulate(A))
+    left_sum, right_sum = 0,0
+    res = -1
+    for i in range(0,len(A)):
+        left_sum = 0 if i==0 else prefix_sum[i-1]
+        right_sum = prefix_sum[len(A)-1] - prefix_sum[i]
+        if left_sum == right_sum:
+            res = i
+            break
     return res
 
 
