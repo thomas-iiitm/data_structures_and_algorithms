@@ -1,8 +1,29 @@
 """
+ Computes the sum of elements in array A for each [L, R] range in B using a prefix sum. 
+ For each query [L, R] in B, returns the sum of A[L..R] both inclusive
+ Time Complexity - O(1) 
+ Space Complexity - O(N)
+"""
+
+def rangeSum(self, A, B):
+
+    prefix_sum = [0] + list(accumulate(A))
+
+    res = []
+    for L, R in B:
+        res.append(prefix_sum[R + 1] - prefix_sum[L])
+
+    return res
+
+
+
+"""
     Return the count of indices i such that removing A[i] makes the sum of
     elements at even indices equal to the sum at odd indices in the new array.  
-
     Also capture the indices that need to remvoed.
+
+    Time Complexity - O(N + M)
+    Space Complexity - O(1)
       
 """
 
